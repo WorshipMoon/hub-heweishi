@@ -1,0 +1,55 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  hub-postgres:
+    image: postgres:15
+    container_name: hub-postgres
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - '5433:5432'
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - hub-django-postgres-network
+  web:
+    build: .
+    container_name: hub-com
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env
+    volumes:
+      # - .:/app
+      - ./logs:/app/logs  # 挂载日志目录到宿主机
+    environment:
+      - DJANGO_ENV=${DJANGO_ENV}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+    command: sh -c "python manage.py migrate && gunicorn --config gunicorn.conf.py project.wsgi:application"
+    # command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+  
+    depends_on:
+      # - hub-postgres
+      hub-postgres:
+        condition: service_healthy
+    restart: always
+    networks:
+      - hub-django-postgres-network
+volumes:
+  pg_data:
+  logs:  # 定义一个日志卷
+networks:
+  hub-django-postgres-network:

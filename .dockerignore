@@ -1,0 +1,20 @@
+*.pyc
+__pycache__
+.git
+.gitignore
+.env
+.env.dev
+.env.local
+*.md
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+venv
+.idea
+.vscode
+.history
+# db.sqlite3 #自行管理
+# media/*
+# static/*
+rav.yaml
+*.log
