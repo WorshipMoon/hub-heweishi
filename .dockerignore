@@ -5,7 +5,7 @@ __pycache__
 .env
 .env.dev
 .env.local
-*.md
+# *.md
 docker-compose*.yml
 Dockerfile*
 .dockerignore
