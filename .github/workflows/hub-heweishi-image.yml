@@ -34,8 +34,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_PAT }}
       - name: Set DOCKER_REPO_TAGGED based on branch or tag
+        # echo "DOCKER_REPO_TAGGED=ghcr.io/${{ github.repository_owner }}/hubheweishi:latest" >> $GITHUB_ENV
         run: |
-          echo "DOCKER_REPO_TAGGED=ghcr.io/${{ github.repository_owner }}/hubheweishi:latest" >> $GITHUB_ENV
+          echo "DOCKER_REPO_TAGGED=$(echo ghcr.io/${{ github.repository_owner }}/hubheweishi:latest | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Build and push Docker image
         env:
           DOCKER_REPO_TAGGED: ${{ env.DOCKER_REPO_TAGGED }}
