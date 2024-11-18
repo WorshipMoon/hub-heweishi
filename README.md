@@ -6,8 +6,7 @@
     │<br>
     ├── .env # source: .env.example<br>
     ├── docker-compose.yml<br>
-    ├── docker-compose.dev.yml # 可选<br>
-    └── README.md<br>
+    └── docker-compose.dev.yml # 可选<br>
 
 
 2. 启动
