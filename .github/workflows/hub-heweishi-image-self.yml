@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - slef
+      - self
     tags:
       - "v*"
 jobs:
