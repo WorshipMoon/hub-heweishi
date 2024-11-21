@@ -53,3 +53,4 @@ rav.yaml
 __pycache__
 /logs/django.log
 test.sql
+/database
