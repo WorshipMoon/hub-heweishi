@@ -51,3 +51,5 @@ rav.yaml
 #
 *.pyc
 __pycache__
+test.sql
+/logs/
