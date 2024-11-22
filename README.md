@@ -5,6 +5,7 @@
     /my-project<br>
     │<br>
     ├── /logs<br>
+    |—— gunicorn.log<br>
     ├── .env # source: .env.example<br>
     ├── docker-compose.yml<br>
     └── docker-compose.dev.yml # 可选<br>

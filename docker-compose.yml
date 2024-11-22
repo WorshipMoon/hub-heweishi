@@ -31,6 +31,7 @@ services:
       - '8000:8000'
     volumes:
       # - .:/app
+      - gunicorn.conf.py:/app/gunicorn.conf.py  # 挂载配置文件到容器
       - ./logs:/app/logs  # 挂载日志目录到宿主机
     env_file:
       - .env
