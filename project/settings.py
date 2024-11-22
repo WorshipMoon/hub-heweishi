@@ -84,7 +84,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-print(tmpPostgres.hostname)
+# print(tmpPostgres.hostname)
 DATABASES = {
     # "default": {
     #     "ENGINE": "django.db.backends.sqlite3",

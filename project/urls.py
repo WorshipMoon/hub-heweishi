@@ -25,7 +25,6 @@ urlpatterns = [
     path("", views.index),
     #  path('', index, name='index'),  # 添加根路由
     path("admin/", admin.site.urls),
-    path("config/", views.config_view, name="config"),
-    path("mvn/<str:param>/", views.mvn, name="mvn"),
+    # path("config/", views.config_view, name="config"),
     path("vnbase/", include("vnbase.urls")),
 ]

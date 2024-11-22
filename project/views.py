@@ -3,6 +3,8 @@ from decouple import config
 from django.conf import settings
 from pathlib import Path
 import logging
+from vnbase.models import VpnLink
+from django.shortcuts import render
 
 # 获取 logger
 logger = logging.getLogger(__name__)
@@ -27,7 +29,3 @@ def test(request):
     return HttpResponse("Hello, You're at the TEST. server")
 
 
-def mvn(request, param):
-    print(f"Received request for param: {param}")
-    print(f"Request path: {request.path}")
-    return HttpResponse(f"mvn {param}")
