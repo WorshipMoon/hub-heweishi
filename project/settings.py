@@ -40,6 +40,7 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
+    "vnbase",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -89,22 +90,22 @@ DATABASES = {
     #     "ENGINE": "django.db.backends.sqlite3",
     #     "NAME": BASE_DIR / "db.sqlite3",
     # }
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": os.environ.get("DATABASE_NAME", "hub_web"),
-    #     "USER": os.environ.get("DATABASE_USER", "sean"),
-    #     "PASSWORD": os.environ.get("DATABASE_PASSWORD", "123456"),
-    #     "HOST": os.environ.get("DATABASE_HOST", "hub-postgres"),
-    #     "PORT": os.environ.get("DATABASE_PORT", "5432"),
-    # }
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": tmpPostgres.path.replace("/", ""),
-        "USER": tmpPostgres.username,
-        "PASSWORD": tmpPostgres.password,
-        "HOST": tmpPostgres.hostname,
-        "PORT": 5432,
+        "NAME": os.environ.get("DATABASE_NAME", "hub_web"),
+        "USER": os.environ.get("DATABASE_USER", "sean"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD", "123456"),
+        "HOST": os.environ.get("DATABASE_HOST", "hub-postgres"),
+        "PORT": os.environ.get("DATABASE_PORT", "5432"),
     }
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": tmpPostgres.path.replace("/", ""),
+    #     "USER": tmpPostgres.username,
+    #     "PASSWORD": tmpPostgres.password,
+    #     "HOST": tmpPostgres.hostname,
+    #     "PORT": 5432,
+    # }
 }
 
 
