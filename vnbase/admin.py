@@ -5,8 +5,16 @@ from .models import VpnLink, VpnZfbOrder, VpnZfbPrice
 
 
 class VpnLinkAdmin(admin.ModelAdmin):
-    list_display = ("note", "link", "expiration_time", "status", "level")
-    search_fields = ["note", "link"]
+    list_display = (
+        "id",
+        "note",
+        "link",
+        "expiration_time",
+        "status",
+        "level",
+        "created_at",
+    )
+    search_fields = ["id", "note", "link"]
     list_filter = ("link", "expiration_time", "status", "created_at")
     ordering = (
         "-status",
@@ -16,15 +24,18 @@ class VpnLinkAdmin(admin.ModelAdmin):
 
 class VpnZfbOrderAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "link",
         "email",
         "device",
         "month",
         "expiration_time",
         "status",
+        "pay_status",
         "level",
+        "created_at",
     )
-    search_fields = ["email", "link"]
+    search_fields = ["id", "email", "link"]
     list_filter = ("link", "expiration_time", "status", "created_at")
     ordering = (
         "-status",
@@ -33,8 +44,8 @@ class VpnZfbOrderAdmin(admin.ModelAdmin):
 
 
 class VpnZfbPriceAdmin(admin.ModelAdmin):
-    list_display = ("price", "level", "name", "status", "created_at")
-    search_fields = ["name"]
+    list_display = ("id", "price", "level", "name", "status", "created_at")
+    search_fields = ["id", "name"]
     list_filter = ("price", "status", "created_at")
     ordering = ("price",)  # 使用price由小到大的排列
 

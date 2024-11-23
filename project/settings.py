@@ -47,11 +47,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -80,10 +83,23 @@ TEMPLATES = [
 WSGI_APPLICATION = "project.wsgi.application"
 
 
+# CORS_URLS_REGEX = r"^/api/.*$"
+CORS_ALLOWED_ORIGINS = []
+ENV_CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=str, default="")
+for origin in ENV_CORS_ALLOWED_ORIGINS.split(","):
+    CORS_ALLOWED_ORIGINS.append(f"{origin}".strip().lower())
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8001",
+#     "http://localhost:3001",
+#     "https://zfbvnlocal.amusi755.com:3001",
+# ]
+
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+# tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 # print(tmpPostgres.hostname)
 DATABASES = {
     # "default": {
@@ -157,6 +173,17 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+# send_mail
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 465
+# EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = "amusu.pain@gmail.com"
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = "amusu.pain@gmail.com"
+
+
 # 确保日志目录存在
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -212,24 +239,3 @@ LOGGING = {
         # },
     },
 }
-
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "handlers": {
-#         "console": {
-#             "class": "logging.StreamHandler",
-#         },
-#     },
-#     "root": {
-#         "handlers": ["console"],
-#         "level": "INFO",
-#     },
-#     "loggers": {
-#         "django.db.backends": {
-#             "level": "INFO",
-#             "handlers": ["console"],
-#             "propagate": False,
-#         },
-#     },
-# }

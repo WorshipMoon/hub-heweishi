@@ -48,14 +48,16 @@ class VpnZfbOrder(TimeStampedMixin):
     email = models.CharField(max_length=255)
     pay_status = models.SmallIntegerField(
         default=0,
-        choices=[(0, "未结"), (1, "已结")],
-        help_text="代理的单是否结算",
+        choices=[(0, "未收款"), (1, "已收")],
+        help_text="收款状态",
     )
     ct_code = models.CharField(max_length=255, null=True, blank=True)
-    ct_status = models.IntegerField()
+    ct_status = models.SmallIntegerField(
+        default=0, help_text="代理的单是否结算 1已结 0 未结"
+    )
 
     def __str__(self):
-        return self.link
+        return self.email
 
 
 class VpnZfbPrice(TimeStampedMixin):

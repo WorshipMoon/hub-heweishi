@@ -18,7 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
-
+from django.conf.urls.static import static
+from django.conf import settings
 # from project.views import index
 
 urlpatterns = [
@@ -28,3 +29,7 @@ urlpatterns = [
     # path("config/", views.config_view, name="config"),
     path("vnbase/", include("vnbase.urls")),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
