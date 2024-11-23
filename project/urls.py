@@ -18,11 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-# from project.views import index
 
 urlpatterns = [
     path("", views.index),
-    #  path('', index, name='index'),  # 添加根路由
     path("admin/", admin.site.urls),
     path('config/', views.config_view, name='config')
     
