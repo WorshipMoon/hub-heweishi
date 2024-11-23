@@ -33,7 +33,7 @@ DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.0.102", "localhub.amusi755.com"]
 
-ALLOWED_HOSTS = [".amusi755.com"]
+ALLOWED_HOSTS = [".amusi755.com", ".vape755.com"]
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 
