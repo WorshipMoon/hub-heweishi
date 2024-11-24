@@ -69,10 +69,11 @@ jobs:
           commit-message: 'Deploy specific files to GitHub Pages'
           clean: true
           clean-exclude: |
+            *
             !docker-compose.yml
             !docker-compose.self.yml
             !.env.example
             !gunicorn.conf.py
             !logs/**
-            */*
+            
         
