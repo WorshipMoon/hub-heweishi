@@ -7,7 +7,7 @@
     - gunicorn.conf.py
     - .env # source: .env.example
     - docker-compose.yml
-    - docker-compose.dev.yml # 可选
+    - docker-compose.self.yml # 可选
 
 
 2. 启动

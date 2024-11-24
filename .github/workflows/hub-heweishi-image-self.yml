@@ -6,12 +6,19 @@ on:
       - self
     tags:
       - "v*"
+
+# 因为我配置了秘钥，所以不需要配置权限
+# permissions:
+#   contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: 'self'
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -51,3 +58,19 @@ jobs:
           -t ${DOCKER_REPO_TAGGED} \
           -f Dockerfile \
           .
+      - name: copy 文件到另一个分支
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: self-dist # 目标分支
+          folder: ''
+          single-commit: true
+          force: true
+          silent: true
+          commit-message: 'Deploy specific files to GitHub Pages'
+          clean-exclude: |
+            docker-compose.yml
+            docker-compose.self.yml
+            .env.example
+            gunicorn.conf.py
+            logs/**
+        
