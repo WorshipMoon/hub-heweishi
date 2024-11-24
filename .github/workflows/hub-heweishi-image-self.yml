@@ -57,24 +57,44 @@ jobs:
           -t ${DOCKER_REPO_TAGGED} \
           -f Dockerfile \
           .
-      - name: copy 文件到另一个分支
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: self-dist # 目标分支
-          folder: '.' # 源目录
-          target-folder: '.' # 目标目录
-          single-commit: true
-          force: true
-          silent: true
-          commit-message: 'Deploy specific files to GitHub Pages'
-          clean: true
-          clean-exclude: |
-            *.*
-            */*
-            !docker-compose.yml
-            !docker-compose.self.yml
-            !.env.example
-            !gunicorn.conf.py
-            !logs/**
+        
+        - name: Copy Specific Files 📁
+          run: |
+            mkdir temp_deploy
+            cp -r logs temp_deploy/
+            cp .env.example temp_deploy/
+            cp docker-compose.yml temp_deploy/
+            cp docker-compose.self.yml temp_deploy/
+            cp gunicorn.conf.py temp_deploy/
+  
+        - name: Deploy 🚀
+          uses: JamesIves/github-pages-deploy-action@v4
+          with:
+            folder: temp_deploy
+            clean: false
+            branch: self-dist
+
+
+
+
+      # - name: copy 文件到另一个分支
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     branch: self-dist # 目标分支
+      #     folder: '.' # 源目录
+      #     target-folder: '.' # 目标目录
+      #     single-commit: true
+      #     force: true
+      #     silent: true
+      #     commit-message: 'Deploy specific files to GitHub Pages'
+      #     clean: true
+      #     clean-exclude: |
+      #       *.*
+      #       */*
+      #       !docker-compose.yml
+      #       !docker-compose.self.yml
+      #       !.env.example
+      #       !gunicorn.conf.py
+      #       !logs/**
             
         
