@@ -2,13 +2,12 @@
 
 1. 目录结构
 
-    /my-project<br>
-    │<br>
-    ├── /logs<br>
-    |—— gunicorn.conf.py<br>
-    ├── .env # source: .env.example<br>
-    ├── docker-compose.yml<br>
-    └── docker-compose.dev.yml # 可选<br>
+- /my-project
+    - /logs
+    - gunicorn.conf.py
+    - .env # source: .env.example
+    - docker-compose.yml
+    - docker-compose.dev.yml # 可选
 
 
 2. 启动
