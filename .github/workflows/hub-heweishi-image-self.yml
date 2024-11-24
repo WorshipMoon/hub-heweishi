@@ -74,4 +74,5 @@ jobs:
             !.env.example
             !gunicorn.conf.py
             !logs/**
+            */*
         
