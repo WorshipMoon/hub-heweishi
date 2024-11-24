@@ -53,8 +53,6 @@ def zfbvn(request, param):
             if vpn_link.status == 0:
                 # 表示未激活，这个时候设置status=1，并且写入过期时间
                 # 写入过期时间
-                from datetime import timedelta
-                from datetime import datetime
                 from dateutil.relativedelta import relativedelta
 
                 expiration_time = vpn_link.created_at + relativedelta(months=vpn_link.month)
