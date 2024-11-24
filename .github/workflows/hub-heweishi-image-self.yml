@@ -7,7 +7,6 @@ on:
     tags:
       - "v*"
 
-# 因为我配置了秘钥，所以不需要配置权限
 permissions:
   contents: write
 
@@ -68,6 +67,7 @@ jobs:
           force: true
           silent: true
           commit-message: 'Deploy specific files to GitHub Pages'
+          clean: false
           clean-exclude: |
             docker-compose.yml
             docker-compose.self.yml
