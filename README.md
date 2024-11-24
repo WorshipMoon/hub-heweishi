@@ -9,6 +9,9 @@
     - docker-compose.yml
     - docker-compose.self.yml # 可选
 
+    ```shell
+    git clone git@github.com:WorshipMoon/hub-heweishi.git
+    ```
 
 2. 启动
 
