@@ -8,8 +8,8 @@ on:
       - "v*"
 
 # 因为我配置了秘钥，所以不需要配置权限
-# permissions:
-#   contents: write
+permissions:
+  contents: write
 
 jobs:
   build:
