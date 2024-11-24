@@ -62,7 +62,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: self-dist # 目标分支
-          folder: ''
+          folder: '.'
+          target-folder: '.'
           single-commit: true
           force: true
           silent: true
