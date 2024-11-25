@@ -73,6 +73,3 @@ jobs:
           -t ${DOCKER_REPO_TAGGED} \
           -f Dockerfile \
           .
-        
-            
-        
