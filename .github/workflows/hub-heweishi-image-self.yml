@@ -23,6 +23,7 @@ jobs:
           mkdir logs
           mkdir temp_deploy
           cp -r logs temp_deploy/
+          cp ./setup.sh temp_deploy/
           cp .env.example temp_deploy/
           cp docker-compose.yml temp_deploy/
           cp docker-compose.self.yml temp_deploy/
