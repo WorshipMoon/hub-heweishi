@@ -30,6 +30,11 @@ SECRET_KEY = config("DJANGO_SECRET_KEY", cast=str)
 # DEBUG = True
 DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.amusi755.com",
+    "https://*.vape755.com",
+]
+
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.0.102", "localhub.amusi755.com"]
 
