@@ -33,8 +33,8 @@ DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    "https://api.amusi755.com",
-    "https://bvn.vape755.com",
+    "https://*.amusi755.com",
+    "https://*.vape755.com",
 ]
 
 # ALLOWED_HOSTS = []
