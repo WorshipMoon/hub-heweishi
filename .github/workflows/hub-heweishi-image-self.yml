@@ -20,6 +20,7 @@ jobs:
           ref: 'self'
       - name: Copy Specific Files 📁
         run: |
+          mkdir logs
           mkdir temp_deploy
           cp -r logs temp_deploy/
           cp .env.example temp_deploy/
