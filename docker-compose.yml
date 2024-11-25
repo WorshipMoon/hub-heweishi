@@ -23,10 +23,10 @@ services:
     restart: always
     networks:
       - hub-django-postgres-network
-  web:
+  hub-api:
     # build: .
     image: ghcr.io/worshipmoon/hubheweishi:latest # ghcr
-    container_name: hub-com
+    container_name: hub-api
     ports:
       - '8000:8000'
     volumes:
