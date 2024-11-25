@@ -6,7 +6,7 @@ services:
     image: postgres:15
     container_name: hub-postgres
     ports:
-      - '5434:5432' # 前面是宿主机端口，根据自己情况修改
+      - '5433:5432' # 前面是宿主机端口，根据自己情况修改
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file:
@@ -27,6 +27,7 @@ services:
     # build: .
     image: ghcr.io/worshipmoon/hubheweishi:v1.0 # ghcr
     container_name: hub-api
+    user: 1002:1002
     ports:
       - '8000:8000'
     volumes:
@@ -53,17 +54,17 @@ services:
     restart: always
     networks:
       - hub-django-postgres-network
-  hub-zfbvn:
-    image: docker pull ghcr.io/worshipmoon/zfbvn:v1.0 # ghcr
-    container_name: hub-zfbvn
-    ports:
-      - '4173:4173'
-    volumes:
-      - ./.env:/app/.env
-    command: sh -c "npm run preview"
-    restart: always
-    networks:
-      - hub-django-postgres-network
+  # hub-zfbvn:
+  #   image: ghcr.io/worshipmoon/zfbvn:v1.0 # ghcr
+  #   container_name: hub-zfbvn
+  #   ports:
+  #     - '4173:4173'
+  #   volumes:
+  #     - ./.env:/app/.env
+  #   command: sh -c "npm run preview"
+  #   restart: always
+  #   networks:
+  #     - hub-django-postgres-network
 
 volumes:
   pg_data:
