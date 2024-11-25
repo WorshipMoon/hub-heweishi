@@ -33,6 +33,7 @@ services:
       # - .:/app
       - gunicorn.conf.py:/app/gunicorn.conf.py  # 挂载 gunicorn 配置文件到容器
       - ./logs:/app/logs  # 挂载日志目录到宿主机
+      - .env:/app/.env
     env_file:
       - .env
     environment:
@@ -52,6 +53,15 @@ services:
     restart: always
     networks:
       - hub-django-postgres-network
+  hub-zfbvn:
+    image: docker pull ghcr.io/worshipmoon/zfbvn:v1.0 # ghcr
+    container_name: hub-zfbvn
+    ports:
+      - '4173:4173'
+    volumes:
+      - .env:/app/.env
+    command: sh -c "npm run preview"
+
 volumes:
   pg_data:
   logs:  # 定义一个日志卷
