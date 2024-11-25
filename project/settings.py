@@ -31,8 +31,8 @@ SECRET_KEY = config("DJANGO_SECRET_KEY", cast=str)
 DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.amusi755.com",
-    "https://*.vape755.com",
+    "https://api.amusi755.com",
+    "https://bvn.vape755.com",
 ]
 
 # ALLOWED_HOSTS = []
