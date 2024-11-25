@@ -25,7 +25,7 @@ services:
       - hub-django-postgres-network
   hub-api:
     # build: .
-    image: ghcr.io/worshipmoon/hubheweishi:latest # ghcr
+    image: ghcr.io/worshipmoon/hubheweishi:v1.0 # ghcr
     container_name: hub-api
     ports:
       - '8000:8000'
