@@ -55,6 +55,7 @@ RUN addgroup --system --gid 1002 django_user && \
 #     chown -R 1002:1002 /home/django_user/.vscode-server
 
 # 确保日志目录的权限正确
+RUN mkdir -p ./logs
 RUN chown -R 1002:1002 /app/logs
 
 # 切换到非-root用户
