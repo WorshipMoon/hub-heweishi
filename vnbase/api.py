@@ -83,7 +83,7 @@ def ZfbVnOrderCreate(request):
             # template_path = os.path.join(os.path.dirname(__file__), 'email_template.html')
             # with open(template_path, 'r', encoding='utf-8') as file:
             # html_message = file.read()
-            activation_link = f"https://bvn.vape755.com/api/zfbwebvn/ZfbVnOrderLinkSetPay?id={order.id}&act=1&type=1"
+            activation_link = f"https://bvn.vape755.com/vnbase/zfbwebvn/ZfbVnOrderLinkSetPay?id={order.id}&act=1&type=1"
             html_message = f"""
                                 <html>
                                     <body>
