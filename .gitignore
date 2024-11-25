@@ -51,7 +51,7 @@ rav.yaml
 #
 *.pyc
 __pycache__
-# /logs/django.log
+/logs/django.log
 /db
 test.sql
 /temp_deploy
