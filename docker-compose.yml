@@ -44,14 +44,15 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
-    command: sh -c "python manage.py migrate && gunicorn --config gunicorn.conf.py project.wsgi:application"
+    command: sh -c "gunicorn --config gunicorn.conf.py project.wsgi:application"
+    # command: sh -c "python manage.py migrate && gunicorn --config gunicorn.conf.py project.wsgi:application"
     # command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
   
     depends_on:
       # - hub-postgres
       hub-postgres:
         condition: service_healthy
-    restart: always
+    # restart: always
     networks:
       - hub-django-postgres-network
   # hub-zfbvn:
