@@ -5,9 +5,10 @@
 - /my-project
     - /logs
     - gunicorn.conf.py
-    - .env # source: .env.example
+    - .env.example
     - docker-compose.yml
-    - docker-compose.self.yml # 可选
+    - docker-compose.self.yml # alternative
+    - setup.sh
 
     ```shell
     git clone git@github.com:WorshipMoon/hub-heweishi.git
@@ -16,6 +17,8 @@
 2. 启动
 
     ```shell
+    sudo chmod +x setup.sh
+    ./setup.sh
     docker-compose up -d
     ```
 
