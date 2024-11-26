@@ -28,7 +28,8 @@ def mvn(request, param):
             "link": vpn_link.link,
             "expiration_time": vpn_link.expiration_time,
         }
-        date_name_daoqi = vpn_link.expiration_time.strftime("%Y-%m-%d")
+        name = vpn_link.expiration_time.strftime("%Y-%m-%d")
+        date_name_daoqi = f"{name}到期"
         date_name2_vx = "VX moonqwe222"
         # 通过level判断返回哪一个模版,把lerver写到模版名称里，类似box{level}.html
         context = {
