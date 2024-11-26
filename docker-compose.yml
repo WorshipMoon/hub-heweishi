@@ -6,7 +6,7 @@ services:
     image: postgres:15
     container_name: hub-postgres
     ports:
-      - '5434:5432' # 前面是宿主机端口，根据自己情况修改
+      - '5433:5432' # 前面是宿主机端口，根据自己情况修改
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file:
@@ -23,16 +23,18 @@ services:
     restart: always
     networks:
       - hub-django-postgres-network
-  web:
+  hub-api:
     # build: .
     image: ghcr.io/worshipmoon/hubheweishi:initial # ghcr
-    container_name: hub-com
+    container_name: hub-api
+    user: 1002:1002
     ports:
       - '8000:8000'
     volumes:
       # - .:/app
-      - gunicorn.conf.py:/app/gunicorn.conf.py  # 挂载配置文件到容器
+      - ./gunicorn.conf.py:/app/gunicorn.conf.py  # 挂载 gunicorn 配置文件到容器
       - ./logs:/app/logs  # 挂载日志目录到宿主机
+      - ./.env:/app/.env
     env_file:
       - .env
     environment:
@@ -43,15 +45,17 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
     command: sh -c "python manage.py migrate && gunicorn --config gunicorn.conf.py project.wsgi:application"
+    # command: sh -c "python manage.py migrate && gunicorn --config gunicorn.conf.py project.wsgi:application"
     # command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
   
     depends_on:
       # - hub-postgres
       hub-postgres:
         condition: service_healthy
-    restart: always
+    # restart: always
     networks:
       - hub-django-postgres-network
+
 volumes:
   pg_data:
   logs:  # 定义一个日志卷

@@ -5,14 +5,17 @@
 - /my-project
     - /logs
     - gunicorn.conf.py
-    - .env # source: .env.example
+    - .env.example
     - docker-compose.yml
-    - docker-compose.dev.yml # 可选
+    - docker-compose.dev.yml # alternative
+    - setup.sh
 
 
 2. 启动
 
     ```shell
+    sudo chmod +x setup.sh
+    ./setup.sh
     docker-compose up -d
     ```
 
