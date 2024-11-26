@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 # from project.views import index
 from django.views.static import serve
+from vnbase import views as vnbase_views
 
 urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
@@ -31,6 +32,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # path("config/", views.config_view, name="config"),
     path("vnbase/", include("vnbase.urls")),
+    
+    path("mvn/<str:param>", vnbase_views.mvn, name="mvn"),
+    path("zfbvn/<str:param>", vnbase_views.zfbvn, name="zfbvn"),
 ]
 
 
