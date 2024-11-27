@@ -15,8 +15,8 @@ dns:
     fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
     fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
 proxies:
-    - { name: {{ date_name_daoqi }}, type: ss, server: hk1.network-cdn-gw.cc, port: 47759, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
-    - { name: 香港-IEPL-Basic专线-01, type: ss, server: hk1.network-cdn-gw.cc, port: 47759, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
+    - { name: {{ date_name_daoqi }}, type: ss, server: hk1.network-cdn-gw.cc, port: 49901, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
+    - { name: 香港-IEPL-Basic专线-01, type: ss, server: hk1.network-cdn-gw.cc, port: 47789, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
     - { name: 香港-IEPL-Basic专线-02, type: ss, server: hk2.network-cdn-gw.cc, port: 47790, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
     - { name: 香港-IEPL-Basic专线-03, type: ss, server: hk13.network-cdn-gw.cc, port: 47757, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
     - { name: 香港-IEPL-Basic专线-04, type: ss, server: hk14.network-cdn-gw.cc, port: 47758, cipher: chacha20-ietf-poly1305, password: {{ VN_PASS }}, udp: true }
