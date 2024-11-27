@@ -33,8 +33,8 @@ urlpatterns = [
     # path("config/", views.config_view, name="config"),
     path("vnbase/", include("vnbase.urls")),
     
-    path("mvn/<str:param>", vnbase_views.mvn, name="mvn"),
-    path("zfbvn/<str:param>", vnbase_views.zfbvn, name="zfbvn"),
+    # path("mvn/<str:param>", vnbase_views.mvn, name="mvn"),
+    # path("zfbvn/<str:param>", vnbase_views.zfbvn, name="zfbvn"),
 ]
 
 

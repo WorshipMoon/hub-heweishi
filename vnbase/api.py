@@ -115,7 +115,6 @@ def ZfbVnOrderCreate(request):
 
 
 @csrf_exempt
-@transaction.atomic
 def ZfbVnOrderLinkSetPay(request):
     if request.method == "GET":
         id = request.GET.get("id")
