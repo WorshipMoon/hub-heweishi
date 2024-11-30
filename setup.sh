@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Clone the repository
-# git clone -b self-dist --single-branch https://github.com/WorshipMoon/hub-heweishi.git && \
-# cd hub-heweishi/ && \
 mkdir -p ./logs && \
 sudo chown -R 1002:1002 ./logs && \
 sudo chmod 755 ./logs && \
