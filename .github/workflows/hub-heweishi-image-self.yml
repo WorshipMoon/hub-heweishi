@@ -70,7 +70,7 @@ jobs:
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
       - name: Set DOCKER_REPO_TAGGED based on branch or tag
-        # echo "DOCKER_REPO_TAGGED=$(echo ghcr.io/${{ github.repository_owner }}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        # 我的名称大写所以要转小写，否则会报错
         run: |
           echo "GHCR_TAGGED=$(echo ghcr.io/${{ github.repository_owner }}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
           echo "DOCKERHUB_TAGGED=$(echo ${{secrets.DOCKERHUB_USERNAME}}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
