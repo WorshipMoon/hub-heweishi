@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: 'self'
+          ref: "self"
       - name: Copy Specific Files 📁
         run: |
           mkdir logs
@@ -48,6 +48,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+      # 登录 GitHub Container Registry
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -55,21 +56,54 @@ jobs:
           # username:${ { github.actor }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_PAT }}
+      # 登录 DockerHub
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # 登录阿里云容器镜像服务
+      - name: Login to Aliyun Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: rregistry.cn-guangzhou.aliyuncs.com
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
       - name: Set DOCKER_REPO_TAGGED based on branch or tag
-        # echo "DOCKER_REPO_TAGGED=ghcr.io/${{ github.repository_owner }}/hubheweishi:latest" >> $GITHUB_ENV
+        # echo "DOCKER_REPO_TAGGED=$(echo ghcr.io/${{ github.repository_owner }}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
         run: |
-          echo "DOCKER_REPO_TAGGED=$(echo ghcr.io/${{ github.repository_owner }}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      - name: Build and push Docker image
-        env:
-          DOCKER_REPO_TAGGED: ${{ env.DOCKER_REPO_TAGGED }}
-        run: |
-          docker buildx build \
-          --platform linux/amd64,linux/arm64 \
-          --label "org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/hubheweishi" \
-          --label "org.opencontainers.image.description=hub heweishi image" \
-          --push \
-          --cache-from=type=local,src=/tmp/.buildx-cache \
-          --cache-to=type=local,dest=/tmp/.buildx-cache \
-          -t ${DOCKER_REPO_TAGGED} \
-          -f Dockerfile \
-          .
+          echo "GHCR_TAGGED=$(echo ghcr.io/${{ github.repository_owner }}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "DOCKERHUB_TAGGED=$(echo ${{secrets.DOCKERHUB_USERNAME}}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "ALIYUN_TAGGED=$(echo registry.cn-guangzhou.aliyuncs.com/${{secrets.ALIYUN_BASENAME}}/hubheweishi:v1.0 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      # 构建并推送镜像
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.GHCR_TAGGED }}
+            ${{ env.DOCKERHUB_TAGGED }}
+            ${{ env.ALIYUN_TAGGED }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/hubheweishi
+            org.opencontainers.image.description=hub heweishi image
+
+      # - name: Build and push Docker image
+      #   env:
+      #     DOCKER_REPO_TAGGED: ${{ env.DOCKER_REPO_TAGGED }}
+      #   run: |
+      #     docker buildx build \
+      #     --platform linux/amd64,linux/arm64 \
+      #     --label "org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/hubheweishi" \
+      #     --label "org.opencontainers.image.description=hub heweishi image" \
+      #     --push \
+      #     --cache-from=type=local,src=/tmp/.buildx-cache \
+      #     --cache-to=type=local,dest=/tmp/.buildx-cache \
+      #     -t ${DOCKER_REPO_TAGGED} \
+      #     -f Dockerfile \
+      #     .

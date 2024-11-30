@@ -115,7 +115,7 @@ DATABASES = {
     # }
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DATABASE_NAME", "hub_web"),
+        "NAME": os.environ.get("DATABASE_NAME", "hub-api-database"),
         "USER": os.environ.get("DATABASE_USER", "sean"),
         "PASSWORD": os.environ.get("DATABASE_PASSWORD", "123456"),
         "HOST": os.environ.get("DATABASE_HOST", "hub-postgres"),
