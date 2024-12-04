@@ -30,15 +30,17 @@ SECRET_KEY = config("DJANGO_SECRET_KEY", cast=str)
 # DEBUG = True
 DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)
 
-
+# 这个设置决定了 CSRF Token 的 Cookie 是否只能通过 HTTPS 连接发送
 CSRF_COOKIE_SECURE = True
+if DEBUG:
+    CSRF_COOKIE_SECURE = False
+    
 CSRF_TRUSTED_ORIGINS = [
     "https://*.amusi755.com",
-    "https://*.vape755.com",
+    "https://*.vape755.com"
 ]
 
 # ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.0.102", "localhub.amusi755.com"]
 
 ALLOWED_HOSTS = [".amusi755.com", ".vape755.com", "185.164.110.67"]
 if DEBUG:

@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 # Create your models here.
@@ -11,16 +12,25 @@ class TimeStampedMixin(models.Model):
 
 
 class VpnLink(TimeStampedMixin):
-    link = models.URLField()
+    def generate_code():
+        return str(uuid.uuid4())
+
+    link = models.URLField(null=True, blank=True)
     note = models.TextField()
-    code = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=50, unique=True, default=generate_code, help_text="每个链接的码")
     status = models.SmallIntegerField(
         default=1,
         choices=[(0, "禁用"), (1, "启用")],
         help_text="状态",
     )
     expiration_time = models.DateTimeField()
-    level = models.IntegerField()
+    level = models.IntegerField(default=1)
+
+    def save(self, *args, **kwargs):
+        if not self.link and self.code:  # 如果 link 没有被设置，并且 code 已存在
+            # https://cc.vape755.com/mvn/b0230bcf-3b47-4751-bb2e-c0526860478e
+            self.link = f"https://cc.vape755.com/mvn/{self.code}"
+        super().save(*args, **kwargs)  # 调用父类的 save 方法保存实例
 
     def __str__(self):
         # return f"{self.note} - {self.expiration_time}"
@@ -33,7 +43,7 @@ class VpnZfbOrder(TimeStampedMixin):
     link = models.CharField(max_length=255)
     month = models.IntegerField(help_text="多少个月")
     device = models.IntegerField(help_text="设备数量做记录")
-    code = models.CharField(max_length=255, help_text="每个人的码", unique=True)
+    code = models.CharField(max_length=50, help_text="每个链接的码", unique=True)
     status = models.SmallIntegerField(
         default=0,
         choices=[(0, "未激活"), (1, "激活"), (2, "已过期")],
