@@ -1,4 +1,3 @@
-import logging
 import multiprocessing
 # 绑定地址和端口
 bind = '0.0.0.0:8000'

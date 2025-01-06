@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 
 def main():
-    # 加载 .env.local 文件中的环境变量
+    # 加载 .env文件中的环境变量
     load_dotenv(dotenv_path=".env", override=True)
 
     """Run administrative tasks."""
