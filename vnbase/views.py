@@ -39,12 +39,12 @@ def mvn(request, param):
             "VN_PASS": os.getenv("VN_PASS"),
         }
         # 或者方法2：使用 render_to_string 渲染模板（如果模板中有变量需要渲染）
-        html_content = render_to_string(f"vnbase/box{vpn_link.level}.html", context)
-        # 将 HTML 内容转换为 base64
-        base64_content = base64.b64encode(html_content.encode('utf-8')).decode('utf-8')
+        # html_content = render_to_string(f"vnbase/box{vpn_link.level}.html", context)
+        # # 将 HTML 内容转换为 base64
+        # base64_content = base64.b64encode(html_content.encode('utf-8')).decode('utf-8')
         
-        # 返回 base64 字符串
-        return HttpResponse(base64_content)
+        # # 返回 base64 字符串
+        # return HttpResponse(base64_content)
         
         return render(request, f"vnbase/box{vpn_link.level}.html", context)
 
@@ -81,6 +81,12 @@ def zfbvn(request, param):
                 "date_name2_vx": date_name2_vx,
                 "VN_PASS": os.getenv("VN_PASS"),
             }
+            html_content = render_to_string(f"vnbase/box{vpn_link.level}.html", context)
+            # 将 HTML 内容转换为 base64
+            base64_content = base64.b64encode(html_content.encode('utf-8')).decode('utf-8')
+            
+            # 返回 base64 字符串
+            return HttpResponse(base64_content)
             return render(request, f"vnbase/box{vpn_link.level}.html", context)
         return render(request, "vnbase/error.html")
     else:
